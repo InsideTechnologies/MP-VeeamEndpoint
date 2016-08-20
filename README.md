@@ -5,6 +5,6 @@ This free Management Pack for System Center Operations Manager allows you to man
 
 What’s New in build 1.0:
 
-View computer state where Endpoint is installed
+View computer state where Endpoint is installed
 View service state
 View the event log about Endpoint
