@@ -1,0 +1,949 @@
+﻿<?xml version="1.0" encoding="utf-8"?><ManagementPack ContentReadable="true" SchemaVersion="2.0" OriginalSchemaVersion="1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <Manifest>
+    <Identity>
+      <ID>Inside.Technologies.Veeam.Endpoint.Unofficial</ID>
+      <Version>1.0.0.0</Version>
+    </Identity>
+    <Name>Inside Technologies - Veeam Endpoint Unofficial</Name>
+    <References>
+      <Reference Alias="SCDW">
+        <ID>Microsoft.SystemCenter.DataWarehouse.Library</ID>
+        <Version>7.2.11469.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="MicrosoftWindowsLibrary7585010">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="MicrosoftSystemCenterNTServiceLibrary">
+        <ID>Microsoft.SystemCenter.NTService.Library</ID>
+        <Version>7.2.11469.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="MicrosoftSystemCenterInstanceGroupLibrary7585010">
+        <ID>Microsoft.SystemCenter.InstanceGroup.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemCenter">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Typeef5ae06c52be4ff08cf11f2a9e3f149d" Accessibility="Public" Abstract="false" Base="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="AttributeDiscoveryGeneratedByUI344455eeb33847a68d019990a7ce7746" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.OwnProcessNTService" Hosted="true" Singleton="false" Extension="false" />
+      </ClassTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="AttributeDiscoveryGeneratedByUI65c28b6b8d3f4a98b3735ba200f0e080" Enabled="true" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>PerformanceCollection</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Typeef5ae06c52be4ff08cf11f2a9e3f149d">
+            <Property TypeID="Typeef5ae06c52be4ff08cf11f2a9e3f149d" PropertyID="AttributeDiscoveryGeneratedByUI344455eeb33847a68d019990a7ce7746" />
+          </DiscoveryClass>
+        </DiscoveryTypes>
+        <DataSource ID="AttributeDiscoveryGeneratedByUId5b4453a73674985b2e8f8150e1005c6" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.RegistryDiscoverySingleProvider">
+          <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+          <AttributeName>AttributeDiscoveryRulebf637717da8042dab998b2db6d0b2ac5</AttributeName>
+          <Path>SOFTWARE\Veeam\Veeam Endpoint Backup</Path>
+          <PathType>0</PathType>
+          <AttributeType>0</AttributeType>
+          <Frequency>300</Frequency>
+          <ClassId>$MPElement[Name="Typeef5ae06c52be4ff08cf11f2a9e3f149d"]$</ClassId>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="Typeef5ae06c52be4ff08cf11f2a9e3f149d"]/AttributeDiscoveryGeneratedByUI344455eeb33847a68d019990a7ce7746$</Name>
+                <Value>$Data/Values/AttributeDiscoveryRulebf637717da8042dab998b2db6d0b2ac5$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group.DiscoveryRule" Enabled="true" Target="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Typeef5ae06c52be4ff08cf11f2a9e3f149d"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <Property>$MPElement[Name="Typeef5ae06c52be4ff08cf11f2a9e3f149d"]/AttributeDiscoveryGeneratedByUI344455eeb33847a68d019990a7ce7746$</Property>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value>true</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Win32ServiceInformationProviderWithClassSnapshotDataMapper">
+          <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+          <ServiceName>VeeamEndpointBackupSvc</ServiceName>
+          <Frequency>60</Frequency>
+          <ClassId>$MPElement[Name="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944"]$</ClassId>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/ServiceName$</Name>
+                <Value>$Data/Property[@Name='Name']$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/ServiceProcessName$</Name>
+                <Value>$Data/Property[@Name='BinaryPathName']$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/DisplayName$</Name>
+                <Value>$Data/Property[@Name='DisplayName']$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/Description$</Name>
+                <Value>$Data/Property[@Name='Description']$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
+                <Value>Monitor Veeam Endpoint Service</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+    <Rules>
+      <Rule ID="MomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">190</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="MomUIGeneratedRule5322f74ad3554ea48d0bc9270ab9b5e8" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">110</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="MomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23120</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="MomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9a" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">10010</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="MomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dce" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">10050</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="MomUIGeneratedRulee170a2d7fbbc40c79230411f952770d7" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">1</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="MomUIGeneratedRulefcac467309bf4a5daa629ab25bd910a5" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23050</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+    </Rules>
+    <Monitors>
+      <UnitMonitor ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor" Accessibility="Public" Enabled="true" Target="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.CheckNTServiceStateMonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <AlertSettings AlertMessage="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.AlertMessage">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>High</AlertPriority>
+          <AlertSeverity>Error</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Target/Host/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</AlertParameter2>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Running" HealthState="Success" />
+          <OperationalState ID="Error" MonitorTypeStateID="NotRunning" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ComputerName>$Target/Host/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+          <ServiceName>$Target/Property[Type="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/ServiceName$</ServiceName>
+          <CheckStartupType>true</CheckStartupType>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor" Accessibility="Public" Enabled="true" Target="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" ParentMonitorID="Health!System.Health.PerformanceState" Remotable="true" Priority="Normal" TypeID="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.ConsecutiveSamplesThreshold.ErrorOnTooHigh" ConfirmDelivery="false">
+        <Category>PerformanceHealth</Category>
+        <AlertSettings AlertMessage="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor.AlertMessage">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Warning</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Data/Context/SampleValue$</AlertParameter2>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="OK" MonitorTypeStateID="SampleCountNormal" HealthState="Success" />
+          <OperationalState ID="Error" MonitorTypeStateID="SampleCountTooHigh" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ServiceName>$Target/Property[Type="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/ServiceName$</ServiceName>
+          <ObjectName>Process</ObjectName>
+          <CounterName>Percent Processor Time</CounterName>
+          <InstanceProperty>Name</InstanceProperty>
+          <ValueProperty>PercentProcessorTime</ValueProperty>
+          <Frequency>300</Frequency>
+          <ScaleBy>$Target/Host/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/LogicalProcessors$</ScaleBy>
+          <Threshold>80</Threshold>
+          <NumSamples>2</NumSamples>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor" Accessibility="Public" Enabled="false" Target="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" ParentMonitorID="Health!System.Health.PerformanceState" Remotable="true" Priority="Normal" TypeID="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.ConsecutiveSamplesThreshold.ErrorOnTooHigh" ConfirmDelivery="false">
+        <Category>PerformanceHealth</Category>
+        <AlertSettings AlertMessage="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor.AlertMessage">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Warning</AlertSeverity>
+          <AlertParameters>
+            <AlertParameter1>$Target/Property[Type="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/DisplayName$</AlertParameter1>
+            <AlertParameter2>$Data/Context/SampleValue$</AlertParameter2>
+          </AlertParameters>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="OK" MonitorTypeStateID="SampleCountNormal" HealthState="Success" />
+          <OperationalState ID="Error" MonitorTypeStateID="SampleCountTooHigh" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ServiceName>$Target/Property[Type="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService"]/ServiceName$</ServiceName>
+          <ObjectName>Process</ObjectName>
+          <CounterName>Private Bytes</CounterName>
+          <InstanceProperty>Name</InstanceProperty>
+          <ValueProperty>PrivateBytes</ValueProperty>
+          <Frequency>300</Frequency>
+          <Threshold>15000000</Threshold>
+          <NumSamples>2</NumSamples>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+    <Overrides>
+      <RuleConfigurationOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPercentProcessorTime.Rule.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectPercentProcessorTime" Parameter="Frequency" Module="DS">
+        <Value>300</Value>
+      </RuleConfigurationOverride>
+      <RulePropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPercentProcessorTime.Rule.Enabled.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectPercentProcessorTime" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RuleConfigurationOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPrivateBytes.Rule.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectPrivateBytes" Parameter="Frequency" Module="DS">
+        <Value>300</Value>
+      </RuleConfigurationOverride>
+      <RulePropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPrivateBytes.Rule.Enabled.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectPrivateBytes" Property="Enabled">
+        <Value>false</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectThreadCount.Rule.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectThreadCount" Property="Enabled">
+        <Value>false</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectWorkingSet.Rule.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectWorkingSet" Property="Enabled">
+        <Value>false</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectHandleCount.Rule.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Rule="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.CollectHandleCount" Property="Enabled">
+        <Value>false</Value>
+      </RulePropertyOverride>
+      <MonitorPropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.Override" Context="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" Enforced="false" Monitor="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.ServiceStateMonitor" Property="Enabled">
+        <Value>false</Value>
+      </MonitorPropertyOverride>
+      <DiscoveryPropertyOverride ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule.Discovery.Override" Context="System!System.Entity" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Discovery="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule" Property="Enabled">
+        <Value>true</Value>
+      </DiscoveryPropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94ForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroup886b8eda682a41a3b3883d8d23945aa5" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRule5322f74ad3554ea48d0bc9270ab9b5e8ForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroup826d9dab3c6f4431952d7e70b72c532c" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRule5322f74ad3554ea48d0bc9270ab9b5e8" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370ForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroup38098c3fda4e469aae0b0adeb6014a00" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dceForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroup4e80a2fb28cb45ee8fa3891eb8dd5931" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dce" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRulee170a2d7fbbc40c79230411f952770d7ForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroupaf922e9de19d488780791ae29bcda532" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRulee170a2d7fbbc40c79230411f952770d7" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRulefcac467309bf4a5daa629ab25bd910a5ForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroup2feb881dfa104126858089869fb6aeb4" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRulefcac467309bf4a5daa629ab25bd910a5" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="OverrideForRuleMomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9aForContextUINameSpace6fe8f4000ce9485c9542b1e972ab6c1eGroup136d913c9b8d45139da564dbbe7e16f9" Context="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group" ContextInstance="b33b29db-34f1-8b4d-ddf3-7efc1d09d138" Enforced="false" Rule="MomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9a" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+    </Overrides>
+  </Monitoring>
+  <Presentation>
+    <Views>
+      <View ID="View_76267c1c490c4e7e8bb6e93dcc4ec188" Accessibility="Public" Enabled="true" Target="System!System.Entity" TypeID="SystemCenter!Microsoft.SystemCenter.EventViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <RuleList>
+            <Rule>ce099fa1-5cbc-6b40-21a6-0fc5a3f110b6</Rule>
+            <Rule>4535942d-b114-f2b2-f8e8-c2067c375986</Rule>
+            <Rule>08f41392-bdf8-83cc-0e93-a9977458617e</Rule>
+            <Rule>159792ed-2be6-d187-b462-d823227e9c41</Rule>
+            <Rule>06ac0f0d-d052-31a7-927f-2ed93a82d4bb</Rule>
+            <Rule>5293ef3d-5a08-bb5c-9ae1-fccbdc02d587</Rule>
+            <Rule>a0d6bab9-941f-fa2f-482c-5e392e8eaf9f</Rule>
+          </RuleList>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Level</Name>
+            <Id>LevelId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>Date and Time</Name>
+            <Id>TimeGenerated</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Source</Name>
+            <Id>PublisherName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>MonitoringObjectDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>User</Name>
+            <Id>User</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Event Number</Name>
+            <Id>Number</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Log Name</Name>
+            <Id>Channel</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Logging Computer</Name>
+            <Id>LoggingComputer</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Rule Name</Name>
+            <Id>RuleDisplayName</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target>b33b29db-34f1-8b4d-ddf3-7efc1d09d138</Target>
+      </View>
+      <View ID="View_982d1e3e4c9d4560b17c50d0732938c5" Accessibility="Public" Enabled="true" Target="Typeef5ae06c52be4ff08cf11f2a9e3f149d" TypeID="SystemCenter!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <InMaintenanceMode>false</InMaintenanceMode>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Typeef5ae06c52be4ff08cf11f2a9e3f149d-*-36fcb9a5-bfda-c661-683e-c0e6cd50826e-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Principal Name</Name>
+            <Id>Microsoft.Windows.Computer/PrincipalName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DNS Name</Name>
+            <Id>Microsoft.Windows.Computer/DNSName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>NetBIOS Computer Name</Name>
+            <Id>Microsoft.Windows.Computer/NetbiosComputerName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>NetBIOS Domain Name</Name>
+            <Id>Microsoft.Windows.Computer/NetbiosDomainName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>IP Address</Name>
+            <Id>Microsoft.Windows.Computer/IPAddress</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Network Name</Name>
+            <Id>Microsoft.Windows.Computer/NetworkName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Active Directory SID</Name>
+            <Id>Microsoft.Windows.Computer/ActiveDirectoryObjectSid</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="false" SortOrder="Ascending">
+            <Name>Virtual Machine</Name>
+            <Id>Microsoft.Windows.Computer/IsVirtualMachine</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DNS Domain Name</Name>
+            <Id>Microsoft.Windows.Computer/DomainDnsName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Organizational Unit</Name>
+            <Id>Microsoft.Windows.Computer/OrganizationalUnit</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DNS Forest Name</Name>
+            <Id>Microsoft.Windows.Computer/ForestDnsName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Active Directory Site</Name>
+            <Id>Microsoft.Windows.Computer/ActiveDirectorySite</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Logical Processors</Name>
+            <Id>Microsoft.Windows.Computer/LogicalProcessors</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Physical Processors</Name>
+            <Id>Microsoft.Windows.Computer/PhysicalProcessors</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Host Server Name</Name>
+            <Id>Microsoft.Windows.Computer/HostServerName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="20" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Virtual Machine Name</Name>
+            <Id>Microsoft.Windows.Computer/VirtualMachineName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="21" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Offset In Minutes From Greenwich Time</Name>
+            <Id>Microsoft.Windows.Computer/OffsetInMinuteFromGreenwichTime</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="22" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="false" SortOrder="Ascending">
+            <Name>Last Inventory Date</Name>
+            <Id>Microsoft.Windows.Computer/LastInventoryDate</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="23" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Detect Veeam Endpoint Backup</Name>
+            <Id>Typeef5ae06c52be4ff08cf11f2a9e3f149d/AttributeDiscoveryGeneratedByUI344455eeb33847a68d019990a7ce7746</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target>b33b29db-34f1-8b4d-ddf3-7efc1d09d138</Target>
+      </View>
+      <View ID="View_7a0c6275adbd478eaefe4f420ec71fd8" Accessibility="Public" Enabled="true" Target="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" TypeID="SystemCenter!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <InMaintenanceMode>false</InMaintenanceMode>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944-*-fda137ad-0b31-d27c-c499-3457da29e1b2-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Service Name</Name>
+            <Id>Microsoft.SystemCenter.NTService/ServiceName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Service Process Name</Name>
+            <Id>Microsoft.SystemCenter.NTService/ServiceProcessName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Service Display Name</Name>
+            <Id>Microsoft.SystemCenter.NTService/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Description</Name>
+            <Id>Microsoft.SystemCenter.NTService/Description</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target />
+      </View>
+    </Views>
+    <Folders>
+      <Folder ID="Folder_486e7bf955ab4b7ba4dc6d4e55ff6280" Accessibility="Public" ParentFolder="SystemCenter!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+      <Folder ID="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" Accessibility="Internal" ParentFolder="MicrosoftSystemCenterNTServiceLibrary!Microsoft.SystemCenter.NTService.OwnProcess.Template.Folder" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944" ID="ia602f374d4ad415f9591c6370bfd5b19" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule" ID="i50ebedc55ed44ca2bd3d57d072c4c01e" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor" ID="i0cfd77a8656043e9a08ee6ff8762a649" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor" ID="i188d2ec57bc94e999ef1a08bd97f52f2" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor" ID="i9cb0a66bdf5847ddb6db08a82c0e9c2f" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPercentProcessorTime.Rule.Override" ID="ie832e3a9c3df47afbd57ca9751350cf8" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPercentProcessorTime.Rule.Enabled.Override" ID="i3d2a4c4632e143e4aa4b45eb66ef35c1" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPrivateBytes.Rule.Override" ID="ie58adb6a9b1a45959f3034a4535833a7" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPrivateBytes.Rule.Enabled.Override" ID="i897f2eded6fb43ecadd19bc66b38a7d1" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectThreadCount.Rule.Override" ID="i2793a964248d43c4a7a7c6f719fef336" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectWorkingSet.Rule.Override" ID="ic93cf1d45c17457f9d5b3ca438acfe45" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectHandleCount.Rule.Override" ID="i2cfafba20fc04cef9a7f737929f256dd" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.Override" ID="ifc6b7868da5b4bf7bdcbb2ac6a1e869e" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule.Discovery.Override" ID="i1c18a94dc90f4d44891b6fa361c086aa" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.AlertMessage" ID="i340ba3e8594a4c5a99f0c98d99c25e2c" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor.AlertMessage" ID="i9e20b85e419b48998df355cf58bd6883" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor.AlertMessage" ID="i85e4b79cfd3642cbb5eac89715e37285" Folder="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1" />
+      <FolderItem ElementID="View_76267c1c490c4e7e8bb6e93dcc4ec188" ID="id881a7d8e0e244fabb3dd273fc19ec53" Folder="Folder_486e7bf955ab4b7ba4dc6d4e55ff6280" />
+      <FolderItem ElementID="View_982d1e3e4c9d4560b17c50d0732938c5" ID="ic75f1082c5ed42eaad2d55a4925d6794" Folder="Folder_486e7bf955ab4b7ba4dc6d4e55ff6280" />
+      <FolderItem ElementID="View_7a0c6275adbd478eaefe4f420ec71fd8" ID="i6b21e87fe20849db943bf6f7ac06865e" Folder="Folder_486e7bf955ab4b7ba4dc6d4e55ff6280" />
+    </FolderItems>
+    <StringResources>
+      <StringResource ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.AlertMessage" />
+      <StringResource ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor.AlertMessage" />
+      <StringResource ID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Unofficial">
+          <Name>Inside Technologies - Veeam Endpoint Unofficial</Name>
+          <Description>This custom management pack allows you to keep under control your client/server with Veeam Endpoint installed.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Folder_486e7bf955ab4b7ba4dc6d4e55ff6280">
+          <Name>Inside Technologies - Veeam Endpoint Unofficial</Name>
+        </DisplayString>
+        <DisplayString ElementID="AttributeDiscoveryGeneratedByUI65c28b6b8d3f4a98b3735ba200f0e080">
+          <Name>Detect Veeam Endpoint BackupDiscovery</Name>
+        </DisplayString>
+        <DisplayString ElementID="Typeef5ae06c52be4ff08cf11f2a9e3f149d">
+          <Name>Windows Computer_Extended</Name>
+        </DisplayString>
+        <DisplayString ElementID="Typeef5ae06c52be4ff08cf11f2a9e3f149d" SubElementID="AttributeDiscoveryGeneratedByUI344455eeb33847a68d019990a7ce7746">
+          <Name>Detect Veeam Endpoint Backup</Name>
+        </DisplayString>
+        <DisplayString ElementID="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group">
+          <Name>Veeam Endpoint Group</Name>
+        </DisplayString>
+        <DisplayString ElementID="UINameSpace6fe8f4000ce9485c9542b1e972ab6c1e.Group.DiscoveryRule">
+          <Name>Populate Veeam Endpoint Group</Name>
+          <Description>This discovery rule populates the group 'Veeam Endpoint Group'</Description>
+        </DisplayString>
+        <DisplayString ElementID="TemplateoutputMicrosoftSystemCenterNTServiceOwnProcessTemplate0612201619490512976ac8797243e98c978916db9940c1">
+          <Name>Monitor Veeam Endpoint Service</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944">
+          <Name>Monitor Veeam Endpoint Service</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule">
+          <Name>Monitor Veeam Endpoint Service Discovery</Name>
+          <Description>Monitor Veeam Endpoint Service Discovery</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor">
+          <Name>Service Running State</Name>
+          <Description>Monitors the current status of the Windows service.  An alert from this monitor indicates the Windows Service is not currently running</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor" SubElementID="Error">
+          <Name>Service is not running</Name>
+          <Description>Service is not running</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor" SubElementID="Success">
+          <Name>Service is running</Name>
+          <Description>Service is running</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.AlertMessage">
+          <Name>Windows Service Stopped</Name>
+          <Description>The '{0}' service on computer {1} has stopped running</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor">
+          <Name>Windows Service CPU Usage Monitor</Name>
+          <Description>Monitors the CPU Usage of the Windows service.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor" SubElementID="Error">
+          <Name>CPU Usage exceeded threshold</Name>
+          <Description>CPUUsage exceeded threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor" SubElementID="OK">
+          <Name>CPU Usage within threshold</Name>
+          <Description>CPUUsage within threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor.AlertMessage">
+          <Name>CPU Usage threshold exceeded</Name>
+          <Description>The '{0}' service has exceeded the % Processor Time threshold with a value of {1}.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor">
+          <Name>Windows Service Memory Usage Monitor</Name>
+          <Description>Monitors the memory usage of the Windows service.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor" SubElementID="Error">
+          <Name>Memory Usage exceeded threshold</Name>
+          <Description>Memory Usage exceeded threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor" SubElementID="OK">
+          <Name>Memory Usage within threshold</Name>
+          <Description>Memory Usage within threshold</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor.AlertMessage">
+          <Name>Memory usage threshold exceeded</Name>
+          <Description>The '{0}' service has exceeded the memory usage threshold with a value of {1}.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPercentProcessorTime.Rule.Override">
+          <Name>Collect Percent Processor Time Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectPrivateBytes.Rule.Override">
+          <Name>Collect Private Bytes Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectThreadCount.Rule.Override">
+          <Name>Collect Thread Count Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectWorkingSet.Rule.Override">
+          <Name>Collect Working Set Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CollectHandleCount.Rule.Override">
+          <Name>Collect Handle Count Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor.Override">
+          <Name>Service State Monitor Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule.Discovery.Override">
+          <Name>Discovery Rule Override</Name>
+        </DisplayString>
+        <DisplayString ElementID="View_76267c1c490c4e7e8bb6e93dcc4ec188">
+          <Name>Event Collect</Name>
+        </DisplayString>
+        <DisplayString ElementID="View_982d1e3e4c9d4560b17c50d0732938c5">
+          <Name>State Computer</Name>
+        </DisplayString>
+        <DisplayString ElementID="View_7a0c6275adbd478eaefe4f420ec71fd8">
+          <Name>State Service</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94">
+          <Name>Veeam Endpoint Job Status</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule5322f74ad3554ea48d0bc9270ab9b5e8">
+          <Name>Veeam Endpoint Job Started</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94" SubElementID="WriteToDW">
+          <Name>Event data publisher</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94" SubElementID="WriteToDB">
+          <Name>Event Data Collection Write Action</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRuleba06179bb9aa48008a57e7ee79631b94" SubElementID="DS">
+          <Name>DS</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370">
+          <Name>Veeam Endpoint Source Objects Updated</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9a">
+          <Name>Veeam Endpoint Restore Point Created</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dce">
+          <Name>Veeam Endpoint Restore Point Deleted</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9a" SubElementID="DS">
+          <Name>DS</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9a" SubElementID="WriteToDW">
+          <Name>Event data publisher</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule1bb7437e233c41468b69d2ed8f37cc9a" SubElementID="WriteToDB">
+          <Name>Event Data Collection Write Action</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370" SubElementID="WriteToDW">
+          <Name>Event data publisher</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370" SubElementID="DS">
+          <Name>DS</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule56aa752b6ee54c5390beabf55d97a370" SubElementID="WriteToDB">
+          <Name>Event Data Collection Write Action</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dce" SubElementID="DS">
+          <Name>DS</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dce" SubElementID="WriteToDW">
+          <Name>Event data publisher</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRule038067d2b5f24af89428c6b0efdf3dce" SubElementID="WriteToDB">
+          <Name>Event Data Collection Write Action</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRulee170a2d7fbbc40c79230411f952770d7">
+          <Name>Veeam Endpoint Source Error</Name>
+        </DisplayString>
+        <DisplayString ElementID="MomUIGeneratedRulefcac467309bf4a5daa629ab25bd910a5">
+          <Name>Veeam Endpoint Job Modified</Name>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles>
+        <KnowledgeArticle ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.DiscoveryRule" Visible="true">
+          <MamlContent>
+            <section xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Summary</maml:title>
+              <maml:para>Discovery rule</maml:para>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+        <KnowledgeArticle ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.PrivateBytesUsage.Monitor" Visible="true">
+          <MamlContent>
+            <section xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Summary</maml:title>
+              <maml:para>This monitor monitors the Memory usage of a Windows service by querying WMI for the performance counter on a timed interval.  The monitor is a consecutive samples over threshold monitor.  This means that the monitor will alert if the memory usage exceeds the given threshold for the given number of consecutive samples.  The specific kind of memory usage being monitored is Private Bytes.</maml:para>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+        <KnowledgeArticle ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.CPUUsage.Monitor" Visible="true">
+          <MamlContent>
+            <section xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Summary</maml:title>
+              <maml:para>This monitor monitors the CPU Usage of a Windows service by querying WMI for the performance counter on a timed interval.  The monitor is a consecutive samples over threshold monitor.  This means that the monitor will alert if the CPU usage exceeds the given threshold for the given number of consecutive samples.</maml:para>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+        <KnowledgeArticle ElementID="ServiceStateProbePage_c23dd881471c44a6ab516bdb6ed39944.ServiceState.Monitor" Visible="true">
+          <MamlContent>
+            <section xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Summary</maml:title>
+              <maml:para>This monitor checks the status of a Windows service by querying the service control manager on a timed interval.  The monitor can be configured in two ways.</maml:para>
+              <maml:para>1) If the monitor is configured to monitor only automatic services.  In this case, if the service is set to automatically start and the service is not currently running an alert will be raised.  If the service is set to manually start or it is disabled, no alert will be raised when the service is stopped.</maml:para>
+              <maml:para>2) If the monitor is not configured to monitor only automatic services.  In this case, no matter how the service is configured to start, if the service is not currently running an alert will be raised.</maml:para>
+            </section>
+            <section xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Causes</maml:title>
+              <maml:para>A service can stop for many reasons, including:</maml:para>
+              <maml:list>
+                <maml:listItem>
+                  <maml:para>The service was stopped by an administrator.</maml:para>
+                </maml:listItem>
+                <maml:listItem>
+                  <maml:para>The service was prevented from starting because the user account could not be authenticated.</maml:para>
+                </maml:listItem>
+                <maml:listItem>
+                  <maml:para>The service encountered an exception that stopped the service.</maml:para>
+                </maml:listItem>
+                <maml:listItem>
+                  <maml:para>The service was improperly configured, which prevented it from starting.</maml:para>
+                </maml:listItem>
+                <maml:listItem>
+                  <maml:para>Another service that this service is dependent on was stopped</maml:para>
+                </maml:listItem>
+              </maml:list>
+            </section>
+            <section xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Resolutions</maml:title>
+              <maml:para>You can view all collected events for this service using the following link:</maml:para>
+              <maml:para>
+                <maml:navigationLink>
+                  <maml:linkText>View all events</maml:linkText>
+                  <maml:uri condition="View" href="Microsoft.SystemCenter.EventView&amp;viewtarget={$TARGET$}" uri="MOM.Console.Exe" />
+                </maml:navigationLink>
+              </maml:para>
+              <maml:para>You can attempt to restart the Windows service by using the following link:</maml:para>
+              <maml:para>
+                <maml:navigationLink>
+                  <maml:linkText>Start the Service</maml:linkText>
+                  <maml:uri condition="Task" href="Microsoft.SystemCenter.NTService.StartService&amp;tasktarget={$TARGET$}" uri="MOM.Console.Exe" />
+                </maml:navigationLink>
+              </maml:para>
+            </section>
+          </MamlContent>
+        </KnowledgeArticle>
+      </KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>
