@@ -7,7 +7,7 @@ What’s New in build 1.0.1.2017:
 
 - Added monitoring for all Events
 - Bug fixing
-- New build convention
+- New building convention
 
 What’s New in build 1.0.0.0:
 
