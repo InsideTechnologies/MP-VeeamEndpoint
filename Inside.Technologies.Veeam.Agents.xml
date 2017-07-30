@@ -1,0 +1,1317 @@
+﻿<?xml version="1.0" encoding="utf-8"?><ManagementPack ContentReadable="true" SchemaVersion="2.0" OriginalSchemaVersion="1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <Manifest>
+    <Identity>
+      <ID>Inside.Technologies.Veeam.Agents</ID>
+      <Version>0.0.28.2017</Version>
+    </Identity>
+    <Name>Inside.Technologies.Veeam.Agents</Name>
+    <References>
+      <Reference Alias="SCDW">
+        <ID>Microsoft.SystemCenter.DataWarehouse.Library</ID>
+        <Version>7.2.11719.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="MicrosoftWindowsLibrary7585010">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="MicrosoftUnixServiceLibrary">
+        <ID>Microsoft.Unix.Service.Library</ID>
+        <Version>7.5.1005.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="MicrosoftSystemCenterInstanceGroupLibrary7585010">
+        <ID>Microsoft.SystemCenter.InstanceGroup.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemCenter">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Unix">
+        <ID>Microsoft.Unix.Library</ID>
+        <Version>7.5.1005.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" Accessibility="Public" Abstract="false" Base="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="Inside.Technologies.Veeam.Agents.Detect.Product" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Inside.Technologies.Veeam.Agents.Detect.Version" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="Inside.Technologies.Veeam.Agents.Detect.Edition" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="Inside.Technologies.Veeam.Agents.Group" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="Inside.Technologies.Veeam.Agents.Linux.Group" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="Inside.Technologies.Veeam.Endpoint.Group" Accessibility="Public" Abstract="false" Base="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroup" Hosted="false" Singleton="true" Extension="false" />
+        <ClassType ID="Inside.Technologies.Veeam.Agents.Linux.Service.Monitor" Accessibility="Public" Abstract="false" Base="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.OwnProcessUnixService" Hosted="true" Singleton="false" Extension="false" />
+      </ClassTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="Inside.Technologies.Veeam.Agents.Detect.ProductDiscovery" Enabled="true" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>PerformanceCollection</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended">
+            <Property TypeID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" PropertyID="Inside.Technologies.Veeam.Agents.Detect.Product" />
+          </DiscoveryClass>
+        </DiscoveryTypes>
+        <DataSource ID="AttributeDiscoveryGeneratedByUId5b4453a73674985b2e8f8150e1005c6" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.RegistryDiscoverySingleProvider">
+          <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+          <AttributeName>AttributeDiscoveryRulebf637717da8042dab998b2db6d0b2ac5</AttributeName>
+          <Path>SOFTWARE\Veeam\Veeam Endpoint Backup</Path>
+          <PathType>0</PathType>
+          <AttributeType>0</AttributeType>
+          <Frequency>300</Frequency>
+          <ClassId>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]$</ClassId>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]/Inside.Technologies.Veeam.Agents.Detect.Product$</Name>
+                <Value>$Data/Values/AttributeDiscoveryRulebf637717da8042dab998b2db6d0b2ac5$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Inside.Technologies.Veeam.Agents.Detect.VersionDiscovery" Enabled="true" Target="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>PerformanceCollection</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended">
+            <Property TypeID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" PropertyID="Inside.Technologies.Veeam.Agents.Detect.Version" />
+          </DiscoveryClass>
+        </DiscoveryTypes>
+        <DataSource ID="AttributeDiscoveryGeneratedByUI0280d711be374bf5b722616456436423" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Discovery.WMISinglePropertyProvider2">
+          <NameSpace>root\CIMV2</NameSpace>
+          <Query>SELECT Version FROM Win32_Product WHERE Name='Veeam Agent for Microsoft Windows' OR Name='Veeam Endpoint Backup'</Query>
+          <Frequency>900</Frequency>
+          <ClassID>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]$</ClassID>
+          <PropertyName>Version</PropertyName>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]/Inside.Technologies.Veeam.Agents.Detect.Version$</Name>
+                <Value>$Data/Property[@Name='Version']$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Inside.Technologies.Veeam.Agents.Detect.EditionDiscovery" Enabled="false" Target="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended">
+            <Property TypeID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" PropertyID="Inside.Technologies.Veeam.Agents.Detect.Edition" />
+          </DiscoveryClass>
+        </DiscoveryTypes>
+        <DataSource ID="AttributeDiscoveryGeneratedByUId5b4453a73674985b2e8f8150e1005c3" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.TimedScript.DiscoveryProvider">
+          <IntervalSeconds>60</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>GetVeeamAgentEdition.vbs</ScriptName>
+          <Arguments>$MPElement$ $Target/Id$</Arguments>
+          <ScriptBody>
+Dim SourceID, ManagedEntityID, TargetComputer
+Dim oAPI, oArgs, oShell, oDiscoveryData, RegistryValue, LicenseValue
+
+Set oShell = CreateObject("WScript.Shell")
+Set oAPI = CreateObject("MOM.ScriptAPI")
+Set oArgs = WScript.Arguments
+
+SourceID = oArgs(0) 
+ManagedEntityID = oArgs(1)
+
+RegistryValue = oShell.RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Veeam\Veeam Agent for Microsoft Windows\license\licensemode")
+
+Select Case RegistryValue
+    Case 0
+        LicenseValue = "Free Edition"
+    Case 1
+        LicenseValue = "Server Edition"
+    Case 2
+        LicenseValue = "Workstation Edition"
+    Case Else
+        LicenseValue = "Missing"
+End Select 
+
+Dim oBag
+Set oBag = oAPI.CreatePropertyBag()
+Call oBag.AddValue("Value", LicenseValue) 
+Call oAPI.Return(oBag)</ScriptBody>
+          <TimeoutSeconds>60</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Inside.Technologies.Veeam.Agents.Group.DiscoveryRule" Enabled="true" Target="Inside.Technologies.Veeam.Agents.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <Property>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]/Inside.Technologies.Veeam.Agents.Detect.Product$</Property>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value>true</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Inside.Technologies.Veeam.Endpoint.Group.DiscoveryRule" Enabled="true" Target="Inside.Technologies.Veeam.Endpoint.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="Inside.Technologies.Veeam.Endpoint.Group"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <Property>$MPElement[Name="Inside.Technologies.Veeam.Agents.Group.ComputerExtended"]/Inside.Technologies.Veeam.Agents.Detect.Product$</Property>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value>true</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Inside.Technologies.Veeam.Agents.Linux.Group.DiscoveryRule" Enabled="true" Target="Inside.Technologies.Veeam.Agents.Linux.Group" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities" />
+        </DiscoveryTypes>
+        <DataSource ID="GroupPopulationDataSource" TypeID="SystemCenter!Microsoft.SystemCenter.GroupPopulator">
+          <RuleId>$MPElement$</RuleId>
+          <GroupInstanceId>$MPElement[Name="Inside.Technologies.Veeam.Agents.Linux.Group"]$</GroupInstanceId>
+          <MembershipRules>
+            <MembershipRule>
+              <MonitoringClass>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.OwnProcessUnixService"]$</MonitoringClass>
+              <RelationshipClass>$MPElement[Name="MicrosoftSystemCenterInstanceGroupLibrary7585010!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$</RelationshipClass>
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <Property>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ServiceName$</Property>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value>veeamservice</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </MembershipRule>
+          </MembershipRules>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="Inside.Technologies.Veeam.Agents.Linux.Service.DiscoveryRule" Enabled="false" Target="Unix!Microsoft.Unix.Computer" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="Inside.Technologies.Veeam.Agents.Linux.Service.Monitor" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Unix!Microsoft.Unix.ScheduledClassSnapshotDataMapper">
+          <Scheduler>
+            <SimpleReccuringSchedule>
+              <Interval Unit="Seconds">14400</Interval>
+              <SyncTime />
+            </SimpleReccuringSchedule>
+            <ExcludeDates />
+          </Scheduler>
+          <ClassId>$MPElement[Name="Inside.Technologies.Veeam.Agents.Linux.Service.Monitor"]$</ClassId>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="Unix!Microsoft.Unix.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="Unix!Microsoft.Unix.Computer"]/PrincipalName$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ServiceName$</Name>
+                <Value>veeamservice</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ModulePath$</Name>
+                <Value>/usr/sbin/veeamservice</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/Handle$</Name>
+                <Value>1079</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ComputerName$</Name>
+                <Value>it00slfs02.insidetechnologies.lcl</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ComputerGUID$</Name>
+                <Value>7b030c65-2190-3c8b-8d83-83ac02903d89</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ComputerGroupName$</Name>
+                <Value />
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="MicrosoftUnixServiceLibrary!Microsoft.SystemCenter.UnixService"]/ComputerGroupGUID$</Name>
+                <Value>00000000-0000-0000-0000-000000000000</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+    <Rules>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.190" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">190</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.191" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">191</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.110" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">110</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.1074" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">1074</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.10010" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">10010</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.10050" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">10050</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.23120" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23120</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.23050" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23050</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Agents.Event.23051" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Agent</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23051</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.190" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">190</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.191" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">191</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.110" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">110</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.1074" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">1074</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.10010" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">10010</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.10050" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">10050</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.23120" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23120</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.23050" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23050</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+      <Rule ID="Inside.Technologies.Veeam.Endpoint.Event.23051" Enabled="false" Target="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer" ConfirmDelivery="true" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>EventCollection</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.EventCollector">
+            <ComputerName>$Target/Property[Type="MicrosoftWindowsLibrary7585010!Microsoft.Windows.Computer"]/NetworkName$</ComputerName>
+            <LogName>Veeam Endpoint Backup</LogName>
+            <AllowProxying>false</AllowProxying>
+            <Expression>
+              <SimpleExpression>
+                <ValueExpression>
+                  <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                </ValueExpression>
+                <Operator>Equal</Operator>
+                <ValueExpression>
+                  <Value Type="UnsignedInteger">23051</Value>
+                </ValueExpression>
+              </SimpleExpression>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WriteToDB" TypeID="SystemCenter!Microsoft.SystemCenter.CollectEvent" />
+          <WriteAction ID="WriteToDW" TypeID="SCDW!Microsoft.SystemCenter.DataWarehouse.PublishEventData" />
+        </WriteActions>
+      </Rule>
+    </Rules>
+    <Monitors>
+      <UnitMonitor ID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor" Accessibility="Public" Enabled="true" Target="Inside.Technologies.Veeam.Agents.Group" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.CheckNTServiceStateMonitorType" ConfirmDelivery="false">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Alert">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Error</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Success" MonitorTypeStateID="Running" HealthState="Success" />
+          <OperationalState ID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Error" MonitorTypeStateID="NotRunning" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ComputerName>.</ComputerName>
+          <ServiceName>VeeamEndpointBackupSvc</ServiceName>
+          <CheckStartupType>true</CheckStartupType>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="Inside.Technologies.Veeam.Endpoint.Service.Monitor" Accessibility="Public" Enabled="true" Target="Inside.Technologies.Veeam.Endpoint.Group" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="MicrosoftWindowsLibrary7585010!Microsoft.Windows.CheckNTServiceStateMonitorType" ConfirmDelivery="false">
+        <Category>Custom</Category>
+        <AlertSettings AlertMessage="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Alert">
+          <AlertOnState>Error</AlertOnState>
+          <AutoResolve>true</AutoResolve>
+          <AlertPriority>Normal</AlertPriority>
+          <AlertSeverity>Error</AlertSeverity>
+        </AlertSettings>
+        <OperationalStates>
+          <OperationalState ID="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Success" MonitorTypeStateID="Running" HealthState="Success" />
+          <OperationalState ID="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Error" MonitorTypeStateID="NotRunning" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <ComputerName>.</ComputerName>
+          <ServiceName>VeeamEndpointBackupSvc</ServiceName>
+          <CheckStartupType>true</CheckStartupType>
+        </Configuration>
+      </UnitMonitor>
+    </Monitors>
+    <Overrides>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.110.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.110" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.190.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.190" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.191.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.191" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.1074.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.1074" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.10010.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.10010" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.10050.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.10050" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.23120.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.23120" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.23050.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.23050" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Agents.Event.23051.Overrides" Context="Inside.Technologies.Veeam.Agents.Group" ContextInstance="49e65402-2f00-52d7-8d1d-c1d39e901b98" Enforced="false" Rule="Inside.Technologies.Veeam.Agents.Event.23051" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.110.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.110" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.190.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.190" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.191.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.191" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.1074.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.1074" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.10010.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.10010" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.10050.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.10050" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.23120.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.23120" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.23050.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.23050" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <RulePropertyOverride ID="Inside.Technologies.Veeam.Endpoint.Event.23051.Overrides" Context="Inside.Technologies.Veeam.Endpoint.Group" ContextInstance="c8faafe8-f838-b998-61e3-37c2788b1d01" Enforced="false" Rule="Inside.Technologies.Veeam.Endpoint.Event.23051" Property="Enabled">
+        <Value>true</Value>
+      </RulePropertyOverride>
+      <DiscoveryPropertyOverride ID="Inside.Technologies.Veeam.Agents.Linux.Service.DiscoveryOverride" Context="Unix!Microsoft.Unix.Computer" ContextInstance="7b030c65-2190-3c8b-8d83-83ac02903d89" Enforced="false" Discovery="Inside.Technologies.Veeam.Agents.Linux.Service.DiscoveryRule" Property="Enabled">
+        <Value>true</Value>
+      </DiscoveryPropertyOverride>
+    </Overrides>
+  </Monitoring>
+  <Presentation>
+    <Views>
+      <View ID="Inside.Technologies.Veeam.Agents.Alerts.View" Accessibility="Public" Enabled="true" Target="System!System.Entity" TypeID="SystemCenter!Microsoft.SystemCenter.EventViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <RuleList>
+            <Rule>fe1c4f91-8855-e82d-6d5b-a2e8fde69f3d</Rule>
+            <Rule>5f30e42e-5c49-c17f-8298-1f9bf174e06c</Rule>
+            <Rule>28d7b3f8-797a-38b4-ad4c-e89f95d2eaa8</Rule>
+            <Rule>48c1ebb6-ae0d-fc14-fa2d-4d5420b6b0fb</Rule>
+            <Rule>9b17fafd-6157-d8cf-80cf-6a8ce5564602</Rule>
+            <Rule>f8777116-9d71-0d1c-5d15-0c8df84e326e</Rule>
+            <Rule>992b7649-e947-8c98-b534-19c4bf9bc83d</Rule>
+            <Rule>eb35b6e5-0ff8-0d9e-7cd9-e5eea6b4f85c</Rule>
+            <Rule>b16faed7-7545-489e-6552-00655dd83c1a</Rule>
+          </RuleList>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Level</Name>
+            <Id>LevelId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>Date and Time</Name>
+            <Id>TimeGenerated</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Rule Name</Name>
+            <Id>RuleDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>MonitoringObjectDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>User</Name>
+            <Id>User</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Event Number</Name>
+            <Id>Number</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Log Name</Name>
+            <Id>Channel</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Logging Computer</Name>
+            <Id>LoggingComputer</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Source</Name>
+            <Id>PublisherName</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target>49e65402-2f00-52d7-8d1d-c1d39e901b98</Target>
+      </View>
+      <View ID="Inside.Technologies.Veeam.Endpoint.Alerts.View" Accessibility="Public" Enabled="true" Target="System!System.Entity" TypeID="SystemCenter!Microsoft.SystemCenter.EventViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <RuleList>
+            <Rule>0259a1bd-bd01-d545-6f61-eb0314afc83b</Rule>
+            <Rule>b2543569-4e39-efdd-3754-99e3ccd52233</Rule>
+            <Rule>3dece1b3-a401-598d-12e7-be7b09e7e272</Rule>
+            <Rule>c3618cc5-8f97-1753-225c-8a6bd4352d80</Rule>
+            <Rule>7d47dcf4-bf95-0313-35e6-59f9de1a7c0f</Rule>
+            <Rule>93a82d73-f299-2a07-2a1c-5ac625bf8014</Rule>
+            <Rule>30a808ff-ec1d-f9e4-39ec-5a158f4a221d</Rule>
+            <Rule>8212e8e2-0fd2-ba45-8961-143a90828432</Rule>
+            <Rule>20064641-0fdc-a763-5da4-fb627ebd8863</Rule>
+          </RuleList>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Level</Name>
+            <Id>LevelId</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>Date and Time</Name>
+            <Id>TimeGenerated</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="120" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Rule Name</Name>
+            <Id>RuleDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="120" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>MonitoringObjectDisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>User</Name>
+            <Id>User</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Event Number</Name>
+            <Id>Number</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Log Name</Name>
+            <Id>Channel</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Logging Computer</Name>
+            <Id>LoggingComputer</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Source</Name>
+            <Id>PublisherName</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target>c8faafe8-f838-b998-61e3-37c2788b1d01</Target>
+      </View>
+      <View ID="Inside.Technologies.Veeam.Agents.Computer.State" Accessibility="Public" Enabled="true" Target="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" TypeID="SystemCenter!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <InMaintenanceMode>false</InMaintenanceMode>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Inside.Technologies.Veeam.Agents.Group.ComputerExtended-*-36fcb9a5-bfda-c661-683e-c0e6cd50826e-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>In Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Principal Name</Name>
+            <Id>Microsoft.Windows.Computer/PrincipalName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DNS Name</Name>
+            <Id>Microsoft.Windows.Computer/DNSName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>NetBIOS Computer Name</Name>
+            <Id>Microsoft.Windows.Computer/NetbiosComputerName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>NetBIOS Domain Name</Name>
+            <Id>Microsoft.Windows.Computer/NetbiosDomainName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>IP Address</Name>
+            <Id>Microsoft.Windows.Computer/IPAddress</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Network Name</Name>
+            <Id>Microsoft.Windows.Computer/NetworkName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Active Directory SID</Name>
+            <Id>Microsoft.Windows.Computer/ActiveDirectoryObjectSid</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="false" SortOrder="Ascending">
+            <Name>Virtual Machine</Name>
+            <Id>Microsoft.Windows.Computer/IsVirtualMachine</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="13" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DNS Domain Name</Name>
+            <Id>Microsoft.Windows.Computer/DomainDnsName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="14" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Organizational Unit</Name>
+            <Id>Microsoft.Windows.Computer/OrganizationalUnit</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="15" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>DNS Forest Name</Name>
+            <Id>Microsoft.Windows.Computer/ForestDnsName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="16" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Active Directory Site</Name>
+            <Id>Microsoft.Windows.Computer/ActiveDirectorySite</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="17" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Logical Processors</Name>
+            <Id>Microsoft.Windows.Computer/LogicalProcessors</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="18" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Physical Processors</Name>
+            <Id>Microsoft.Windows.Computer/PhysicalProcessors</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="19" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Host Server Name</Name>
+            <Id>Microsoft.Windows.Computer/HostServerName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="20" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Virtual Machine Name</Name>
+            <Id>Microsoft.Windows.Computer/VirtualMachineName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="21" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Offset In Minutes From Greenwich Time</Name>
+            <Id>Microsoft.Windows.Computer/OffsetInMinuteFromGreenwichTime</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="22" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="false" SortOrder="Ascending">
+            <Name>Last Inventory Date</Name>
+            <Id>Microsoft.Windows.Computer/LastInventoryDate</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="23" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Veeam Agent Name</Name>
+            <Id>Inside.Technologies.Veeam.Agents.Group.ComputerExtended/Inside.Technologies.Veeam.Agents.Detect.Product</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="24" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Veeam Agent Version</Name>
+            <Id>Inside.Technologies.Veeam.Agents.Group.ComputerExtended/Inside.Technologies.Veeam.Agents.Detect.Version</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="25" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Veeam Agent Edition</Name>
+            <Id>Inside.Technologies.Veeam.Agents.Group.ComputerExtended/Inside.Technologies.Veeam.Agents.Detect.Edition</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target>49e65402-2f00-52d7-8d1d-c1d39e901b98</Target>
+      </View>
+      <View ID="Inside.Technologies.Veeam.Agents.ComputerLinux.State" Accessibility="Public" Enabled="true" Target="Inside.Technologies.Veeam.Agents.Linux.Service.Monitor" TypeID="SystemCenter!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <InMaintenanceMode>false</InMaintenanceMode>
+        </Criteria>
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Inside.Technologies.Veeam.Agents.Linux.Service.Monitor-*-7c4aa513-33e0-132b-6ab1-f0ef039b37c0-*-Health</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Path</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>System.Entity/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Service Name</Name>
+            <Id>Microsoft.SystemCenter.UnixService/ServiceName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Path</Name>
+            <Id>Microsoft.SystemCenter.UnixService/ModulePath</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Display Name</Name>
+            <Id>Microsoft.SystemCenter.UnixService/DisplayName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Handle</Name>
+            <Id>Microsoft.SystemCenter.UnixService/Handle</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Target Computer Name</Name>
+            <Id>Microsoft.SystemCenter.UnixService/ComputerName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Target Computer GUID</Name>
+            <Id>Microsoft.SystemCenter.UnixService/ComputerGUID</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="11" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Target Computer Group Name</Name>
+            <Id>Microsoft.SystemCenter.UnixService/ComputerGroupName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="12" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending">
+            <Name>Target Computer Group GUID</Name>
+            <Id>Microsoft.SystemCenter.UnixService/ComputerGroupGUID</Id>
+          </ColumnInfo>
+        </Presentation>
+        <Target>4a248b2b-eb33-3577-0f94-2e251e021583</Target>
+      </View>
+    </Views>
+    <Folders>
+      <Folder ID="Inside.Technologies.Veeam.Agents.Monitor.Folder" Accessibility="Public" ParentFolder="SystemCenter!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+      <Folder ID="TemplateoutputMicrosoftUnixServiceTemplate0103201719223224b6738d980440a497cdd44867b5fa00" Accessibility="Internal" ParentFolder="MicrosoftUnixServiceLibrary!Microsoft.Unix.Service.Template.Folder" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ElementID="Inside.Technologies.Veeam.Agents.Alerts.View" ID="id881a7d8e0e244fabb3dd273fc19ec53" Folder="Inside.Technologies.Veeam.Agents.Monitor.Folder" />
+      <FolderItem ElementID="Inside.Technologies.Veeam.Agents.Computer.State" ID="ic75f1082c5ed42eaad2d55a4925d6794" Folder="Inside.Technologies.Veeam.Agents.Monitor.Folder" />
+      <FolderItem ElementID="Inside.Technologies.Veeam.Agents.ComputerLinux.State" ID="if4fb717a26f4451296f0f9c6a84d684a" Folder="Inside.Technologies.Veeam.Agents.Monitor.Folder" />
+      <FolderItem ElementID="Inside.Technologies.Veeam.Endpoint.Alerts.View" ID="id881a7d8e0e244fabb3dd273fc19ec54" Folder="Inside.Technologies.Veeam.Agents.Monitor.Folder" />
+      <FolderItem ElementID="Inside.Technologies.Veeam.Agents.Linux.Service.Monitor" ID="i51e602148e744180919cdac51618504a" Folder="TemplateoutputMicrosoftUnixServiceTemplate0103201719223224b6738d980440a497cdd44867b5fa00" />
+      <FolderItem ElementID="Inside.Technologies.Veeam.Agents.Linux.Service.DiscoveryRule" ID="i8ef443a05905464aab9911e8c63298eb" Folder="TemplateoutputMicrosoftUnixServiceTemplate0103201719223224b6738d980440a497cdd44867b5fa00" />
+      <FolderItem ElementID="Inside.Technologies.Veeam.Agents.Linux.Service.DiscoveryOverride" ID="ib21ac4f255784eaf933b75f6c06f7cdb" Folder="TemplateoutputMicrosoftUnixServiceTemplate0103201719223224b6738d980440a497cdd44867b5fa00" />
+    </FolderItems>
+    <StringResources>
+      <StringResource ID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Alert" />
+      <StringResource ID="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Alert" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents">
+          <Name>Inside Technologies - Veeam Agent Management Pack</Name>
+          <Description>Management Pack to monitor and manage Veeam Agent for Windows/Linux and Veeam Endpoint Backup, created by Silvio Di Benedetto. For feedback and support visit Inside Technologies portal on GitHub.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Monitor.Folder">
+          <Name>Inside Technologies - Veeam Agent</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended">
+          <Name>Windows Computer_Extended</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Group">
+          <Name>Veeam Agent Group Windows</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Linux.Group">
+          <Name>Veeam Agent Group Linux</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Group">
+          <Name>Veeam Endpoint Group Windows</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Group.DiscoveryRule">
+          <Name>Populate Veeam Agent Group Windows</Name>
+          <Description>This discovery rule populates the group 'Veeam Agents Group Windows'</Description>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Linux.Group.DiscoveryRule">
+          <Name>Populate Veeam Agent Group Linux</Name>
+          <Description>This discovery rule populates the group 'Veeam Agent Group Linux'</Description>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Alerts.View">
+          <Name>Event Agent Windows</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Alerts.View">
+          <Name>Event Endpoint Backup</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Computer.State">
+          <Name>State Windows</Name>
+          <Description>List of all computer with Veeam Agent for Windows installed</Description>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.ComputerLinux.State">
+          <Name>State Linux</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.190">
+          <Name>Veeam Agents Job Finished</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.110">
+          <Name>Veeam Agents Job Started</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.191">
+          <Name>Veeam Agents Job Retry</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.1074">
+          <Name>Veeam Agents Computer Shut Down</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.10010">
+          <Name>Veeam Agents Restore Point Created</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.10050">
+          <Name>Veeam Agents Restore Point Removed</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.23120">
+          <Name>Veeam Agents Job Created</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.23050">
+          <Name>Veeam Agents Job Modified</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.23051">
+          <Name>Veeam Agents Options Modified</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.190">
+          <Name>Veeam Endpoint Job Finished</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.110">
+          <Name>Veeam Endpoint Job Started</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.191">
+          <Name>Veeam Endpoint Job Retry</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.1074">
+          <Name>Veeam Endpoint Computer Shut Down</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.10010">
+          <Name>Veeam Endpoint Restore Point Created</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.10050">
+          <Name>Veeam Endpoint Restore Point Removed</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.23120">
+          <Name>Veeam Endpoint Job Created</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.23050">
+          <Name>Veeam Endpoint Job Modified</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Event.23051">
+          <Name>Veeam Endpoint Options Modified</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.190" SubElementID="WriteToDW">
+          <Name>Event data publisher</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.190" SubElementID="WriteToDB">
+          <Name>Event Data Collection Write Action</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Event.190" SubElementID="DS">
+          <Name>DS</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Detect.ProductDiscovery">
+          <Name>Detect Veeam Agents BackupDiscovery</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" SubElementID="Inside.Technologies.Veeam.Agents.Detect.Product">
+          <Name>Veeam Agent Name</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Detect.VersionDiscovery">
+          <Name>Detect Veeam Agents VersionDiscovery</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" SubElementID="Inside.Technologies.Veeam.Agents.Detect.Version">
+          <Name>Veeam Agent Version</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Detect.EditionDiscovery">
+          <Name>Detect Veeam Agents EditionDiscovery</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Group.ComputerExtended" SubElementID="Inside.Technologies.Veeam.Agents.Detect.Edition">
+          <Name>Veeam Agent Edition</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor">
+          <Name>Veeam Agent Monitor Service Windows</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor" SubElementID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Success">
+          <Name>Service is running</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor" SubElementID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Error">
+          <Name>Service is not running</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Windows.Service.Monitor.Alert">
+          <Name>Veeam Agent Service Stopped</Name>
+          <Description>Veeam Agent for Microsoft Windows is not running</Description>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Service.Monitor">
+          <Name>Veeam Endpoint Monitor Service Windows</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Service.Monitor" SubElementID="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Success">
+          <Name>Service is running</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Service.Monitor" SubElementID="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Error">
+          <Name>Service is not running</Name>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Endpoint.Service.Monitor.Alert">
+          <Name>Veeam Endpoint Service Stopped</Name>
+          <Description>Veeam Endpoint for Microsoft Windows is not running</Description>
+        </DisplayString>
+        <DisplayString ElementID="TemplateoutputMicrosoftUnixServiceTemplate0103201719223224b6738d980440a497cdd44867b5fa00">
+          <Name>Veeam Agent Monitor Service Linux</Name>
+          <Description>Veeam Agent for Linux Service (veeamservice) is a service responsible for managing all tasks and resources in Veeam Agent for Linux. The veeamservice component is registered as a daemon in the Linux OS upon the product installation. The service is started automatically when you start the OS, and runs in the background.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Inside.Technologies.Veeam.Agents.Linux.Service.Monitor">
+          <Name>Veeam Agent Monitor Service Linux</Name>
+          <Description>Veeam Agent for Linux Service (veeamservice) is a service responsible for managing all tasks and resources in Veeam Agent for Linux. The veeamservice component is registered as a daemon in the Linux OS upon the product installation. The service is started automatically when you start the OS, and runs in the background.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>
