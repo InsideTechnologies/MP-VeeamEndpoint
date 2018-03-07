@@ -1,6 +1,4 @@
-#MP-VeeamAgent
-
-Welcome to Veeam Agent Management Pack project
+# Welcome to Veeam Agent Management Pack project
 
 This free Management Pack for System Center Operations Manager allows you to manage Veeam Agent for Windows/Linux plus Veeam Endpoint Backup. The project is open and everyone can improve the MP. For more information you send a feedback from our web page: www.insidetechnologies.eu.
 
