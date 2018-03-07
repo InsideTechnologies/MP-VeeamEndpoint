@@ -7,14 +7,13 @@ What’s New in build 0.0.28.2017:
 - Monitor Veeam Agent for Windows and Linux
 - Monitor Veeam Endpoint
 
-What’s New in build 1.0.1.2017:
-
-- Added monitoring for all Events
-- Bug fixing
-- New building convention
-
 What’s New in build 1.0.0.0:
 
 - View computer state where Endpoint is installed
 - View service state
 - View the event log about Endpoint
+
+What’s New in build 1.0.1.2017:
+
+- Added monitoring for all Events
+- Bug fixing
